@@ -1,6 +1,9 @@
 FROM		debian:wheezy
 MAINTAINER	Julian Haupt <julian.haupt@hauptmedia.de>
 
+# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+RUN		groupadd -r mysql && useradd -r -g mysql mysql
+
 ENV		DEBIAN_FRONTEND noninteractive
 
 # install needed packages
@@ -25,6 +28,9 @@ RUN		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082
 
 ENV		GALERA_VERSION 25.3.9
 
+# comment out a few problematic configuration values
+RUN		sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf
+
 # install galera
 RUN		apt-get update -qq && \
 		apt-get -y install galera-3="${GALERA_VERSION}-wheezy" && \
@@ -48,4 +54,8 @@ RUN		apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A && \
 
 EXPOSE		3306 4444 4567 4568
 
-VOLUME		["/var/lib/mysql"]
+VOLUME		/var/lib/mysql
+COPY		docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT	["/entrypoint.sh"]
+
+CMD ["mysqld"]
