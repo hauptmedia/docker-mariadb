@@ -7,6 +7,18 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 if [ "$1" = 'mysqld' ]; then
+	if [ -z "$CLUSTER_NAME" ]; then
+		echo >&2 'error:  missing CLUSTER_NAME'
+		echo >&2 '  Did you forget to add -e CLUSTER_NAME=... ?'
+		exit 1
+	fi
+	
+	if [ -z "$CLUSTER_ADDRESS" ]; then
+		echo >&2 'error:  missing CLUSTER_ADDRESS'
+		echo >&2 '  Did you forget to add -e CLUSTER_ADDRESS=... ?'
+		exit 1
+	fi
+
 	# read DATADIR from the MySQL config
 	DATADIR="$("$@" --verbose --help 2>/dev/null | awk '$1 == "datadir" { print $2; exit }')"
 	
@@ -16,14 +28,16 @@ if [ "$1" = 'mysqld' ]; then
 			echo >&2 '  Did you forget to add -e MYSQL_ROOT_PASSWORD=... ?'
 			exit 1
 		fi
+
+		if [ -z "$XTRABACKUP_PASSWORD" ]; then
+			echo >&2 'error:  missing XTRABACKUP_PASSWORD'
+			echo >&2 '  Did you forget to add -e XTRABACKUP_PASSWORD=... ?'
+			exit 1
+		fi
 		
 		echo 'Running mysql_install_db ...'
 		mysql_install_db --datadir="$DATADIR"
 		echo 'Finished mysql_install_db'
-		
-		# These statements _must_ be on individual lines, and _must_ end with
-		# semicolons (no line breaks or comments are permitted).
-		# TODO proper SQL escaping on ALL the things D:
 		
 		tempSqlFile='/tmp/mysql-first-time.sql'
 		cat > "$tempSqlFile" <<-EOSQL
@@ -33,7 +47,11 @@ if [ "$1" = 'mysqld' ]; then
 			
 			DELETE FROM mysql.user ;
 			CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;
-			GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
+			GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION;
+
+			CREATE USER 'xtrabackup'@'%' IDENTIFIED BY '${XTRABACKUP_PASSWORD}';
+			GRANT RELOAD,LOCK TABLES,REPLICATION CLIENT ON *.* TO 'xtrabackup'@'%';
+
 			DROP DATABASE IF EXISTS test ;
 		EOSQL
 		
@@ -55,6 +73,13 @@ if [ "$1" = 'mysqld' ]; then
 	fi
 	
 	chown -R mysql:mysql "$DATADIR"
+
+	set -- "$@" \
+		--wsrep_cluster_name="$CLUSTER_NAME" \
+		--wsrep_cluster_address="$CLUSTER_ADDRESS" \
+		--wsrep_sst_auth="xtrabackup:$XTRABACKUP_PASSWORD" \
+		--default-time-zone="+01:00"
+
 fi
 
 exec "$@"
