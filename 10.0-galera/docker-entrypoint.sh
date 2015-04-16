@@ -29,9 +29,9 @@ if [ "$1" = 'mysqld' ]; then
 			exit 1
 		fi
 
-		if [ -z "$XTRABACKUP_PASSWORD" ]; then
-			echo >&2 'error:  missing XTRABACKUP_PASSWORD'
-			echo >&2 '  Did you forget to add -e XTRABACKUP_PASSWORD=... ?'
+		if [ -z "$REPLICATION_PASSWORD" ]; then
+			echo >&2 'error:  missing REPLICATION_PASSWORD'
+			echo >&2 '  Did you forget to add -e REPLICATION_PASSWORD=... ?'
 			exit 1
 		fi
 		
@@ -49,8 +49,8 @@ if [ "$1" = 'mysqld' ]; then
 			CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;
 			GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION;
 
-			CREATE USER 'xtrabackup'@'%' IDENTIFIED BY '${XTRABACKUP_PASSWORD}';
-			GRANT RELOAD,LOCK TABLES,REPLICATION CLIENT ON *.* TO 'xtrabackup'@'%';
+			CREATE USER 'replication'@'%' IDENTIFIED BY '${REPLICATION_PASSWORD}';
+			GRANT RELOAD,LOCK TABLES,REPLICATION CLIENT ON *.* TO 'replication'@'%';
 
 			DROP DATABASE IF EXISTS test ;
 		EOSQL
@@ -77,7 +77,7 @@ if [ "$1" = 'mysqld' ]; then
 	set -- "$@" \
 		--wsrep_cluster_name="$CLUSTER_NAME" \
 		--wsrep_cluster_address="$CLUSTER_ADDRESS" \
-		--wsrep_sst_auth="xtrabackup:$XTRABACKUP_PASSWORD" \
+		--wsrep_sst_auth="replication:$REPLICATION_PASSWORD" \
 		--default-time-zone="+01:00"
 
 fi
