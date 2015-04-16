@@ -70,6 +70,11 @@ if [ "$1" = 'mysqld' ]; then
 		echo 'FLUSH PRIVILEGES ;' >> "$tempSqlFile"
 		
 		set -- "$@" --init-file="$tempSqlFile"
+
+	else
+		WSREP_START_POSITION="$("$@" --wsrep-recover --log-error=/dev/stdout 2>&1 | grep 'Recovered position' | awk '{print $NF}')" 
+		echo WSREP: Using start position ${WSREP_START_POSITION}
+		set -- "$@" --wsrep_start_position=${WSREP_START_POSITION}
 	fi
 	
 	chown -R mysql:mysql "$DATADIR"
