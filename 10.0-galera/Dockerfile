@@ -39,6 +39,7 @@ RUN		apt-get update -qq && \
 		rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # add configuration
+ADD		conf.d/utf8.cnf /etc/mysql/conf.d/utf8.cnf
 ADD		conf.d/galera.cnf /etc/mysql/conf.d/galera.cnf
 
 # 3306 - MySQL client connections
