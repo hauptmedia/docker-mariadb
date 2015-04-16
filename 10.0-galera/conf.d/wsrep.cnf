@@ -1,6 +1,6 @@
 [mysqld]
 wsrep_provider=/usr/lib/galera/libgalera_smm.so
-wsrep_sst_method=xtrabackup
+wsrep_sst_method=xtrabackup-v2
 
 # wsrep only supports binlog_format='ROW' and storage-engine=innodb
 binlog_format=ROW

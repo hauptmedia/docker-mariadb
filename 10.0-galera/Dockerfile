@@ -1,4 +1,4 @@
-FROM		ubuntu:14.04
+FROM		debian:jessie
 MAINTAINER	Julian Haupt <julian.haupt@hauptmedia.de>
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
@@ -19,9 +19,9 @@ ENV		MARIADB_VERSION 10.0.17
 
 # install mariadb
 RUN		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
-		echo "deb http://ftp.hosteurope.de/mirror/mariadb.org/repo/${MARIADB_MAJOR}/ubuntu trusty main" >>/etc/apt/sources.list && \
+		echo "deb http://ftp.hosteurope.de/mirror/mariadb.org/repo/${MARIADB_MAJOR}/debian wheezy main" >>/etc/apt/sources.list && \
 		apt-get update -qq && \
-		apt-get -y install mariadb-galera-server-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~trusty" mariadb-client-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~trusty" && \
+		apt-get -y install percona-xtrabackup mariadb-galera-server-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~wheezy" mariadb-client-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~wheezy" && \
 		apt-get clean autoclean && \
 		apt-get autoremove --yes && \ 
 		rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
@@ -33,16 +33,7 @@ ENV		GALERA_VERSION 25.3.9
 
 # install galera
 RUN		apt-get update -qq && \
-		apt-get -y install galera-3="${GALERA_VERSION}-trusty" && \
-		apt-get clean autoclean && \
-		apt-get autoremove --yes && \ 
-		rm -rf /var/lib/{apt,dpkg,cache,log}/
-
-# install xtrabackup
-RUN		apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A && \
-		echo "deb http://repo.percona.com/apt trusty main" >>/etc/apt/sources.list && \
-		apt-get update -qq && \
-		apt-get install percona-xtrabackup && \
+		apt-get -y install galera-3="${GALERA_VERSION}-wheezy" && \
 		apt-get clean autoclean && \
 		apt-get autoremove --yes && \ 
 		rm -rf /var/lib/{apt,dpkg,cache,log}/
