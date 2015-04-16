@@ -39,7 +39,7 @@ RUN		apt-get update -qq && \
 		rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # add configuration
-ADD		conf.d/wsrep.cnf /etc/mysql/conf.d/wsrep.cnf
+ADD		conf.d/galera.cnf /etc/mysql/conf.d/galera.cnf
 
 # 3306 - MySQL client connections
 # 4567 - Galera Cluster replication traffic, multicast replication uses both udp & tcp
