@@ -47,6 +47,9 @@ RUN		apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A && \
 		apt-get autoremove --yes && \ 
 		rm -rf /var/lib/{apt,dpkg,cache,log}/
 
+# add configuration
+ADD		conf.d/wsrep.cnf /etc/mysql/conf.d/wsrep.cnf
+
 # 3306 - MySQL client connections
 # 4567 - Galera Cluster replication traffic, multicast replication uses both udp & tcp
 # 4568 - For Incremental State Transfers
