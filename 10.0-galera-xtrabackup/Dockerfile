@@ -24,12 +24,12 @@ RUN		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082
 		apt-get -y install mariadb-galera-server-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~wheezy" mariadb-client-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~wheezy" && \
 		apt-get clean autoclean && \
 		apt-get autoremove --yes && \ 
-		rm -rf /var/lib/{apt,dpkg,cache,log}/
+		rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
+		rm -rf /var/lib/mysql && \
+		mkdir /var/lib/mysql && \
+		sed -ri 's/^(bind-address|skip-networking|log)/;\1/' /etc/mysql/my.cnf
 
 ENV		GALERA_VERSION 25.3.9
-
-# comment out a few problematic configuration values
-RUN		sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf
 
 # install galera
 RUN		apt-get update -qq && \
