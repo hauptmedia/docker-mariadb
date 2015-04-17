@@ -10,7 +10,7 @@ docker run -i -t --rm \
 -e REPLICATION_PASSWORD=test \
 -e CLUSTER_NAME=test \
 -e CLUSTER_ADDRESS=gcomm://ip1,ip2 \
-hauptmedia/10.0-galera --wsrep-new-cluster
+hauptmedia/mariadb:10.0-galera --wsrep-new-cluster
 ```
 
 Join a node to the cluster:
@@ -21,5 +21,5 @@ docker run -i -t --rm \
 -e REPLICATION_PASSWORD=test \
 -e CLUSTER_NAME=test \
 -e CLUSTER_ADDRESS=gcomm://ip1,ip2 \
-hauptmedia/10.0-galera
+hauptmedia/mariadb:10.0-galera
 ```
