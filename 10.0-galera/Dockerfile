@@ -33,7 +33,7 @@ ENV		GALERA_VERSION 25.3.9
 
 # install galera
 RUN		apt-get update -qq && \
-		apt-get -y install galera-3="${GALERA_VERSION}-wheezy" && \
+		apt-get -y install galera-arbitrator-3="${GALERA_VERSION}-wheezy" galera-3="${GALERA_VERSION}-wheezy" && \
 		apt-get clean autoclean && \
 		apt-get autoremove --yes && \ 
 		rm -rf /var/lib/{apt,dpkg,cache,log}/
