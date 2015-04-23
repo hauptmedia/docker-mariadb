@@ -13,6 +13,12 @@ if [ "$1" = 'mysqld' ]; then
 		exit 1
 	fi
 	
+	if [ -z "$NODE_NAME" ]; then
+		echo >&2 'error:  missing NODE_NAME'
+		echo >&2 '  Did you forget to add -e NODE_NAME=... ?'
+		exit 1
+	fi
+	
 	if [ -z "$CLUSTER_ADDRESS" ]; then
 		echo >&2 'error:  missing CLUSTER_ADDRESS'
 		echo >&2 '  Did you forget to add -e CLUSTER_ADDRESS=... ?'
@@ -82,6 +88,7 @@ if [ "$1" = 'mysqld' ]; then
 	set -- "$@" \
 		--wsrep_cluster_name="$CLUSTER_NAME" \
 		--wsrep_cluster_address="$CLUSTER_ADDRESS" \
+		--wsrep_node_name="$NODE_NAME" \
 		--wsrep_sst_auth="replication:$REPLICATION_PASSWORD" \
 		--default-time-zone="+01:00"
 
