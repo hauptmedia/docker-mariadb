@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+# set timezone if it was specified
+if [ -n "$TIMEZONE" ]; then
+	echo ${TIMEZONE} > /etc/timezone && \
+	dpkg-reconfigure -f noninteractive tzdata
+fi
+
+
 # if command starts with an option, prepend mysqld
 if [ "${1:0:1}" = '-' ]; then
 	set -- mysqld "$@"
@@ -89,8 +96,7 @@ if [ "$1" = 'mysqld' ]; then
 		--wsrep_cluster_name="$CLUSTER_NAME" \
 		--wsrep_cluster_address="$CLUSTER_ADDRESS" \
 		--wsrep_node_name="$NODE_NAME" \
-		--wsrep_sst_auth="replication:$REPLICATION_PASSWORD" \
-		--default-time-zone="+01:00"
+		--wsrep_sst_auth="replication:$REPLICATION_PASSWORD"
 
 fi
 
