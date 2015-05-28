@@ -21,7 +21,7 @@ ENV		MARIADB_VERSION 10.0.17
 RUN		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
 		echo "deb http://ftp.hosteurope.de/mirror/mariadb.org/repo/${MARIADB_MAJOR}/debian wheezy main" >>/etc/apt/sources.list && \
 		apt-get update -qq && \
-		apt-get -y install percona-xtrabackup mariadb-galera-server-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~wheezy" mariadb-client-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~wheezy" && \
+		apt-get -y install percona-toolkit percona-xtrabackup mariadb-galera-server-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~wheezy" mariadb-client-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~wheezy" && \
 		apt-get clean autoclean && \
 		apt-get autoremove --yes && \ 
 		rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
