@@ -19,9 +19,9 @@ ENV		MARIADB_VERSION 10.0.21
 
 # install mariadb
 RUN		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
-		echo "deb http://ftp.hosteurope.de/mirror/mariadb.org/repo/${MARIADB_MAJOR}/debian wheezy main" >>/etc/apt/sources.list && \
+		echo "deb http://ftp.hosteurope.de/mirror/mariadb.org/repo/${MARIADB_MAJOR}/debian jessie main" >>/etc/apt/sources.list && \
 		apt-get update -qq && \
-		apt-get -y install percona-toolkit percona-xtrabackup mariadb-galera-server-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~wheezy" mariadb-client-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~wheezy" && \
+		apt-get -y install percona-toolkit percona-xtrabackup mariadb-server-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~jessie" mariadb-client-${MARIADB_MAJOR}="${MARIADB_VERSION}+maria-1~jessie" && \
 		apt-get clean autoclean && \
 		apt-get autoremove --yes && \ 
 		rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
