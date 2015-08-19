@@ -59,6 +59,11 @@ if [ "$1" = 'mysqld' ]; then
 	fi
 	
 	chown -R mysql:mysql "$DATADIR"
+
+
+	if [ -n "$PORT" ]; then
+		sed -i -e "s/^port.*=.*3306.*/port=${PORT}/" /etc/mysql/my.cnf 
+	fi
 fi
 
 exec "$@"
