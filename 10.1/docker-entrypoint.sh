@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 DATADIR=/var/lib/mysql
+IP=$(hostname --ip-address)
 
 # set timezone if it was specified
 if [ -n "$TIMEZONE" ]; then
@@ -108,7 +109,8 @@ if [ "$1" = 'mysqld' ]; then
 		--wsrep_cluster_name="$CLUSTER_NAME" \
 		--wsrep_cluster_address="$CLUSTER_ADDRESS" \
 		--wsrep_node_name="$NODE_NAME" \
-		--wsrep_sst_auth="replication:$REPLICATION_PASSWORD"
+		--wsrep_sst_auth="replication:$REPLICATION_PASSWORD" \
+		--wsrep_sst_receive_address=$IP
 	fi
 
 fi
