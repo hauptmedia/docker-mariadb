@@ -115,6 +115,15 @@ if [ "$1" = 'mysqld' ]; then
 		--wsrep_sst_receive_address=$IP
 	fi
 
+	if [ -n "$LOG_BIN" ]; then
+                set -- "$@" --log-bin="$LOG_BIN"
+	fi
+
+        if [ -n "$LOG_BIN_INDEX" ]; then
+                set -- "$@" --log-bin-index="$LOG_BIN_INDEX"
+        fi
+
+
 fi
 
 exec "$@"
