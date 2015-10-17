@@ -18,6 +18,7 @@ sync_binlog=0
 query_cache_size=8000000
 query_cache_type=1
 
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
 wsrep_sst_method=xtrabackup-v2
 
 # force transaction level to be read commited
