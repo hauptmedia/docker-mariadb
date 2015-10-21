@@ -15,7 +15,7 @@ docker run -i -t --rm \
 -e GALERA=On \
 -e NODE_NAME=node1 \
 -e CLUSTER_NAME=test \
--e CLUSTER_ADDRESS=gcomm:// \
+-e CLUSTER_ADDRESS=gcomm://ipOrHost1,ipOrHost2,ipOrHost3 \
 hauptmedia/mariadb:10.1 --wsrep-new-cluster
 ```
 
@@ -29,7 +29,7 @@ docker run -i -t --rm \
 -e GALERA=On \
 -e NODE_NAME=node2 \
 -e CLUSTER_NAME=test \
--e CLUSTER_ADDRESS=gcomm://ip1,ip2 \
+-e CLUSTER_ADDRESS=gcomm://ipOrHost1,ipOrHost2,ipOrHost3 \
 hauptmedia/mariadb:10.1
 ```
 
