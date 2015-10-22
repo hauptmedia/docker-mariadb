@@ -108,12 +108,12 @@ if [ "$1" = 'mysqld' ]; then
 
 	if [ -n "$LOG_BIN" ]; then
                 set -- "$@" --log-bin="$LOG_BIN"
-		chown mysql.mysql $(dirname $LOG_BIN)
+		chown mysql:mysql $(dirname $LOG_BIN)
 	fi
 
         if [ -n "$LOG_BIN_INDEX" ]; then
                 set -- "$@" --log-bin-index="$LOG_BIN_INDEX"
-		chown mysql.mysql $(dirname $LOG_BIN)
+		chown mysql:mysql $(dirname $LOG_BIN)
         fi
 
 
