@@ -6,11 +6,11 @@
 
 `MAX_CONNECTIONS` - Specified the maximum of parallel connections allowed to use the service
 
-`MYSQL_ROOT_PASSWORD` - If set, the root password will be set to this password (only if data-dir was non existant on startup)
+`MYSQL_ROOT_PASSWORD` - If set, the root password will be set to this password (only if data-dir was non existent on startup)
 
-`MYSQL_DATABASE` - If set, this database will be created (only if data-dir was non existant on startup)
+`MYSQL_DATABASE` - If set, this database will be created (only if data-dir was non existent on startup)
 
-`MYSQL_USER` - If set, this user will be created (only if data-dir was no existant on startup)
+`MYSQL_USER` - If set, this user will be created (only if data-dir was no existent on startup)
 
 `MYSQL_PASSWORD` - If set, this $MYSQL_USER will be created with this password
 
