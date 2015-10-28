@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 DATADIR=/var/lib/mysql
-IP=$(hostname --ip-address)
+IP=$(hostname --ip-address | cut -d" " -f1)
 
 # set timezone if it was specified
 if [ -n "$TIMEZONE" ]; then
