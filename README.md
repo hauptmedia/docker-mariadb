@@ -30,7 +30,16 @@
 
 `REPLICATION_PASSWORD` - Password for the replication user which will be needed to allow state transfers using xtrabackupv2 method
 
-## MariaDB Galera Cluster
+
+## Running MariaDB in Standalone Mode
+
+```bash
+docker run -i -t --rm \
+-e TIMEZONE=Europe/Berlin \
+-e MYSQL_ROOT_PASSWORD=securepassword \
+hauptmedia/mariadb:10.1
+```
+## Running MariaDB in Galera Cluster Mode
 
 For known limitations have a look at https://mariadb.com/kb/en/mariadb/mariadb-galera-cluster-known-limitations
 
