@@ -58,8 +58,12 @@ ADD		conf.d/galera.cnf /etc/mysql/conf.d/galera.cnf
 
 EXPOSE		3306 4444 4567 4568
 
-VOLUME		/var/lib/mysql
+VOLUME		["/var/lib/mysql"]
 COPY		docker-entrypoint.sh /entrypoint.sh
+
+# Set TERM env to avoid mysql client error message "TERM environment variable not set" when running from inside the container
+ENV TERM xterm
+
 ENTRYPOINT	["/entrypoint.sh"]
 
 CMD ["mysqld"]
