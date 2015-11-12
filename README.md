@@ -16,6 +16,7 @@
 | QUERY_CACHE_SIZE | 16M | The amount of memory allocated for caching query results |
 | INNODB_LOG_FILE_SIZE | 48M | Size in bytes of each log file in the log group |
 | QUERY_CACHE_TYPE | 1 | Set the query cache type 0=OFF, 1=ON, 2=DEMAND |
+| SYNC_BINLOG | 0 | Controls the number of binary log commit groups to collect before synchronizing the binary log to disk. When sync_binlog=0, the binary log is never synchronized to disk, and when sync_binlog is set to a value greater than 0 this number of binary log commit groups is periodically synchronized to disk. When sync_binlog=1, all transactions are synchronized to the binary log before they are committed |
 
 ### Galera specific settings
 
