@@ -15,6 +15,7 @@
 | MAX_ALLOWED_PACKET | 16M | The maximum size of one packet |
 | QUERY_CACHE_SIZE | 16M | The amount of memory allocated for caching query results |
 | INNODB_LOG_FILE_SIZE | 48M | Size in bytes of each log file in the log group |
+| QUERY_CACHE_TYPE | 1 | Set the query cache type 0=OFF, 1=ON, 2=DEMAND |
 
 ### Galera specific settings
 

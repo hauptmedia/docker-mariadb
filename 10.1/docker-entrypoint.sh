@@ -16,6 +16,7 @@ sed -i -e "s/^#max_connections.*=.*/max_connections=${MAX_CONNECTIONS}/" /etc/my
 sed -i -e "s/^max_allowed_packet.*=.*/max_allowed_packet=${MAX_ALLOWED_PACKET}/" /etc/mysql/my.cnf 
 sed -i -e "s/^query_cache_size.*=.*/query_cache_size=${QUERY_CACHE_SIZE}/" /etc/mysql/my.cnf 
 sed -i -e "s/^\[mysqld\]/\[mysqld\]\ninnodb_log_file_size=${INNODB_LOG_FILE_SIZE}/" /etc/mysql/my.cnf 
+sed -i -e "s/^\[mysqld\]/\[mysqld\]\nquery_cache_type=${QUERY_CACHE_TYPE}/" /etc/mysql/my.cnf 
 
 
 # if command starts with an option, prepend mysqld
