@@ -20,6 +20,7 @@ sed -i -e "s/^\[mysqld\]/\[mysqld\]\nquery_cache_type=${QUERY_CACHE_TYPE}/" /etc
 sed -i -e "s/^\[mysqld\]/\[mysqld\]\nsync_binlog=${SYNC_BINLOG}/" /etc/mysql/my.cnf 
 sed -i -e "s/^\[mysqld\]/\[mysqld\]\ninnodb_buffer_pool_size=${INNODB_BUFFER_POOL_SIZE}/" /etc/mysql/my.cnf 
 sed -i -e "s/^\[mysqld\]/\[mysqld\]\ninnodb_flush_method=${INNODB_FLUSH_METHOD}/" /etc/mysql/my.cnf 
+sed -i -e "s/^\[mysqld\]/\[mysqld\]\ninnodb_old_blocks_time=${INNODB_OLD_BLOCKS_TIME}/" /etc/mysql/my.cnf 
 
 
 # if command starts with an option, prepend mysqld
