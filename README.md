@@ -2,34 +2,26 @@
 
 ## Available environment configuration
 
-`PORT`- Specify the MySQL Service Port
-
-`MAX_CONNECTIONS` - Specified the maximum of parallel connections allowed to use the service
-
-`MYSQL_ROOT_PASSWORD` - If set, the root password will be set to this password (only if data-dir was non existent on startup)
-
-`MYSQL_DATABASE` - If set, this database will be created (only if data-dir was non existent on startup)
-
-`MYSQL_USER` - If set, this user will be created (only if data-dir was no existent on startup)
-
-`MYSQL_PASSWORD` - If set, this $MYSQL_USER will be created with this password
-
-`LOG_BIN` - Base filename for binary logs (will enable binary logs)
-
-`LOG_BIN_INDEX` - Location of the log-bin index file
+| Variable | Default value | Description |
+| -------- | ------------- | ----------- |
+| PORT | 3306 | Specify the MySQL Service Port |
+| MAX_CONNECTIONS | 100 | Specified the maximum of parallel connections allowed to use the service |
+| MYSQL_ROOT_PASSWORD | | If set, the root password will be set to this password (only if data-dir was non existent on startup) |
+| MYSQL_DATABASE | | If set, this database will be created (only if data-dir was non existent on startup) |
+| MYSQL_USER | | If set, this user will be created (only if data-dir was no existent on startup) |
+| MYSQL_PASSWORD | | If set, this $MYSQL_USER will be created with this password |
+| LOG_BIN | | Base filename for binary logs (will enable binary logs) |
+| LOG_BIN_INDEX | | Location of the log-bin index file |
 
 ### Galera specific settings
 
-`GALERA` - If set the galera extension will be enabled
-
-`CLUSTER_NAME` - Unique Name that identified the Galera Cluster
-
-`NODE_NAME` - Unique Node name that identified this node instance
-
-`CLUSTER_ADDRESS` - gcomm:// style resource identifier that provides topology information about the Galera Cluster
-
-`REPLICATION_PASSWORD` - Password for the replication user which will be needed to allow state transfers using xtrabackupv2 method
-
+| Variable | Default value | Description |
+| -------- | ------------- | ----------- |
+| GALERA | | If set the galera extension will be enabled |
+| CLUSTER_NAME | | Unique Name that identified the Galera Cluster |
+| NODE_NAME | | Unique Node name that identified this node instance |
+| CLUSTER_ADDRESS | | gcomm:// style resource identifier that provides topology information about the Galera Cluster |
+| REPLICATION_PASSWORD | | Password for the replication user which will be needed to allow state transfers using xtrabackupv2 method |
 
 ## Running MariaDB in Standalone Mode
 
