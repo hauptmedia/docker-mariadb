@@ -15,7 +15,7 @@ RUN		apt-get update -qq && \
 		rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 ENV		MARIADB_MAJOR 10.0 
-ENV		MARIADB_VERSION 10.0.21
+ENV		MARIADB_VERSION 10.0.22
 
 # install mariadb
 RUN		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
