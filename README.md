@@ -13,6 +13,7 @@
 | LOG_BIN | | Base filename for binary logs (will enable binary logs) |
 | LOG_BIN_INDEX | | Location of the log-bin index file |
 | MAX_ALLOWED_PACKET | 16M | The maximum size of one packet |
+| QUERY_CACHE_SIZE | 16M | The amount of memory allocated for caching query results |
 
 ### Galera specific settings
 

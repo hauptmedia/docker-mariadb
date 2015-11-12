@@ -10,6 +10,11 @@ if [ -n "$TIMEZONE" ]; then
 	dpkg-reconfigure -f noninteractive tzdata
 fi
 
+# apply environment configuration
+sed -i -e "s/^port.*=.*/port=${PORT}/" /etc/mysql/my.cnf 
+sed -i -e "s/^#max_connections.*=.*/max_connections=${MAX_CONNECTIONS}/" /etc/mysql/my.cnf 
+sed -i -e "s/^max_allowed_packet.*=.*/max_allowed_packet=${MAX_ALLOWED_PACKET}/" /etc/mysql/my.cnf 
+sed -i -e "s/^query_cache_size.*=.*/query_cache_size=${QUERY_CACHE_SIZE}/" /etc/mysql/my.cnf 
 
 # if command starts with an option, prepend mysqld
 if [ "${1:0:1}" = '-' ]; then
@@ -17,10 +22,6 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 if [ "$1" = 'mysqld' ]; then
-	sed -i -e "s/^port.*=.*/port=${PORT}/" /etc/mysql/my.cnf 
-	sed -i -e "s/^#max_connections.*=.*/max_connections=${MAX_CONNECTIONS}/" /etc/mysql/my.cnf 
-	sed -i -e "s/^max_allowed_packet.*=.*/max_allowed_packet=${MAX_ALLOWED_PACKET}/" /etc/mysql/my.cnf 
-
 	if [ -n "$GALERA" ]; then
 		if [ -z "$CLUSTER_NAME" ]; then
 			echo >&2 'error:  missing CLUSTER_NAME'
