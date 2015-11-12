@@ -19,6 +19,7 @@ sed -i -e "s/^\[mysqld\]/\[mysqld\]\ninnodb_log_file_size=${INNODB_LOG_FILE_SIZE
 sed -i -e "s/^\[mysqld\]/\[mysqld\]\nquery_cache_type=${QUERY_CACHE_TYPE}/" /etc/mysql/my.cnf 
 sed -i -e "s/^\[mysqld\]/\[mysqld\]\nsync_binlog=${SYNC_BINLOG}/" /etc/mysql/my.cnf 
 sed -i -e "s/^\[mysqld\]/\[mysqld\]\ninnodb_buffer_pool_size=${INNODB_BUFFER_POOL_SIZE}/" /etc/mysql/my.cnf 
+sed -i -e "s/^\[mysqld\]/\[mysqld\]\ninnodb_flush_method=${INNODB_FLUSH_METHOD}/" /etc/mysql/my.cnf 
 
 
 # if command starts with an option, prepend mysqld
