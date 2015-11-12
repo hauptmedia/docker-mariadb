@@ -14,6 +14,7 @@
 | LOG_BIN_INDEX | | Location of the log-bin index file |
 | MAX_ALLOWED_PACKET | 16M | The maximum size of one packet |
 | QUERY_CACHE_SIZE | 16M | The amount of memory allocated for caching query results |
+| INNODB_LOG_FILE_SIZE | 48M | Size in bytes of each log file in the log group |
 
 ### Galera specific settings
 

@@ -6,12 +6,6 @@ RUN		groupadd -r mysql && useradd -r -g mysql mysql
 
 ENV		DEBIAN_FRONTEND noninteractive
 
-ENV \
-	MAX_CONNECTIONS=100 \
-	PORT=3306 \
-	MAX_ALLOWED_PACKET=16M \
-	QUERY_CACHE_SIZE=16M
-
 # install needed packages
 RUN		apt-get update -qq && \
 		apt-get upgrade --yes && \
@@ -69,6 +63,13 @@ COPY		docker-entrypoint.sh /entrypoint.sh
 
 # Set TERM env to avoid mysql client error message "TERM environment variable not set" when running from inside the container
 ENV TERM xterm
+
+# default values for configuration options
+ENV	MAX_CONNECTIONS=100 \
+	PORT=3306 \
+	MAX_ALLOWED_PACKET=16M \
+	QUERY_CACHE_SIZE=16M \
+	INNODB_LOG_FILE_SIZE=48M
 
 ENTRYPOINT	["/entrypoint.sh"]
 
