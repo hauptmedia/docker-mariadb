@@ -12,6 +12,7 @@
 | MYSQL_PASSWORD | | If set, this $MYSQL_USER will be created with this password |
 | LOG_BIN | | Base filename for binary logs (will enable binary logs) |
 | LOG_BIN_INDEX | | Location of the log-bin index file |
+| MAX_ALLOWED_PACKET | 16M | The maximum size of one packet |
 
 ### Galera specific settings
 

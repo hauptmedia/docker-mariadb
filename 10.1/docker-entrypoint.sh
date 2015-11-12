@@ -3,6 +3,7 @@ set -e
 DATADIR=/var/lib/mysql
 IP=$(hostname --ip-address | cut -d" " -f1)
 
+
 # set timezone if it was specified
 if [ -n "$TIMEZONE" ]; then
 	echo ${TIMEZONE} > /etc/timezone && \
@@ -16,6 +17,10 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 if [ "$1" = 'mysqld' ]; then
+	sed -i -e "s/^port.*=.*/port=${PORT}/" /etc/mysql/my.cnf 
+	sed -i -e "s/^#max_connections.*=.*/max_connections=${MAX_CONNECTIONS}/" /etc/mysql/my.cnf 
+	sed -i -e "s/^max_allowed_packet.*=.*/max_allowed_packet=${MAX_ALLOWED_PACKET}/" /etc/mysql/my.cnf 
+
 	if [ -n "$GALERA" ]; then
 		if [ -z "$CLUSTER_NAME" ]; then
 			echo >&2 'error:  missing CLUSTER_NAME'
@@ -89,13 +94,6 @@ if [ "$1" = 'mysqld' ]; then
 	
 	chown -R mysql:mysql "$DATADIR"
 
-	if [ -n "$PORT" ]; then
-		sed -i -e "s/^port.*=.*3306/port=${PORT}/" /etc/mysql/my.cnf 
-	fi
-
-	if [ -n "$MAX_CONNECTIONS" ]; then
-		sed -i -e "s/^#max_connections.*=.*100/max_connections=${MAX_CONNECTIONS}/" /etc/mysql/my.cnf 
-	fi
 
 	if [ -n "$GALERA" ]; then
 		# append galera specific run options
