@@ -18,7 +18,7 @@
 | QUERY_CACHE_TYPE | 1 | Set the query cache type 0=OFF, 1=ON, 2=DEMAND |
 | SYNC_BINLOG | 0 | Controls the number of binary log commit groups to collect before synchronizing the binary log to disk. When sync_binlog=0, the binary log is never synchronized to disk, and when sync_binlog is set to a value greater than 0 this number of binary log commit groups is periodically synchronized to disk. When sync_binlog=1, all transactions are synchronized to the binary log before they are committed |
 | INNODB_BUFFER_POOL_SIZE | 128M | The size in bytes of the buffer pool, the memory area where InnoDB caches table and index data |
-| INNODB_FLUSH_METHOD | NULL | Defines the method used to flush data to the InnoDB data files and log files, which can affect I/O throughput |
+| INNODB_FLUSH_METHOD | | Defines the method used to flush data to the InnoDB data files and log files, which can affect I/O throughput |
 | INNODB_OLD_BLOCKS_TIME | 1000 | Non-zero values protect against the buffer pool being filled up by data that is referenced only for a brief period, such as during a full table scan. Increasing this value offers more protection against full table scans interfering with data cached in the buffer pool. |
 | INNODB_FLUSH_LOG_AT_TRX_COMMIT | 1 | Controls the balance between strict ACID compliance for commit operations, and higher performance that is possible when commit-related I/O operations are rearranged and done in batches. You can achieve better performance by changing the default value, but then you can lose up to a second of transactions in a crash. |
 
