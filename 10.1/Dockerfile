@@ -38,7 +38,7 @@ RUN		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082
 		mkdir /var/lib/mysql && \
 		sed -ri 's/^(bind-address|skip-networking|log)/;\1/' /etc/mysql/my.cnf
 
-ENV		GALERA_VERSION 25.3.9
+ENV		GALERA_VERSION 25.3.15
 
 # install galera
 RUN		apt-get update -qq && \
