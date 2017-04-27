@@ -24,7 +24,7 @@ RUN	        apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A 
 		rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 ENV		MARIADB_MAJOR 10.1
-ENV		MARIADB_VERSION 10.1.14
+ENV		MARIADB_VERSION 10.1.22
 
 # install mariadb
 RUN		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
