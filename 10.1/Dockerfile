@@ -24,7 +24,7 @@ RUN	        apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A 
 		rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 ENV		MARIADB_MAJOR 10.1
-ENV		MARIADB_VERSION 10.1.22
+ENV		MARIADB_VERSION 10.1.23
 
 # install mariadb
 RUN		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
@@ -38,7 +38,7 @@ RUN		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082
 		mkdir /var/lib/mysql && \
 		sed -ri 's/^(bind-address|skip-networking|log)/;\1/' /etc/mysql/my.cnf
 
-ENV		GALERA_VERSION 25.3.15
+ENV		GALERA_VERSION 25.3.20
 
 # install galera
 RUN		apt-get update -qq && \
