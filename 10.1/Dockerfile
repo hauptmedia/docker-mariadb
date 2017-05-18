@@ -15,7 +15,7 @@ RUN		apt-get update -qq && \
 		rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # install percona tools
-RUN	        apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A && \
+RUN		apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8507EFA5 && \        
 		echo "deb http://repo.percona.com/apt jessie main" >>/etc/apt/sources.list && \	
 		apt-get update -qq && \
 		apt-get -y install percona-toolkit percona-xtrabackup && \
