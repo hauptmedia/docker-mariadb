@@ -1,0 +1,25 @@
+[galera]
+wsrep_on=ON
+
+# wsrep only supports binlog_format='ROW' and storage-engine=innodb
+binlog_format=row
+default_storage_engine=InnoDB
+
+# to avoid issues with 'bulk mode inserts' using autoinc
+innodb_autoinc_lock_mode=2
+
+bind-address=0.0.0.0
+
+# relax flushing logs when running in galera mode
+innodb_flush_log_at_trx_commit=0
+sync_binlog=0
+
+# Query Cache is supported since version 10.0.14 with wsrep
+query_cache_size=8000000
+query_cache_type=1
+
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+wsrep_sst_method=xtrabackup-v2
+
+# force transaction level to be read commited
+#transaction-isolation = READ-COMMITTED
